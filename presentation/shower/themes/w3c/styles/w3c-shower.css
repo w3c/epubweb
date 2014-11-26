@@ -1,0 +1,157 @@
+
+body {
+	line-height: 1.4em !important
+}
+
+.slide {
+  background: #add9e4;
+  background: -moz-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #f7fbfc), color-stop(100%, #add9e4));
+  background: -webkit-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: -o-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: -ms-radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background: radial-gradient(center, circle cover, #f7fbfc 0%, #add9e4 100%);
+  background-color: #f7fbfc; 
+
+  font-family: "Open Sans", sans-serif;
+  font-size: 28px;
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  color: #333333; 
+}
+
+ul ul li, ol ul li {
+	font-size: 80% !important
+}
+
+ul li, ol li    { 
+	padding-bottom: 0.3em !important
+}
+
+.slide ol ol,.slide ol ul,.slide ul ol,.slide ul ul {
+    margin: 0 0 0 0.5em;
+}
+
+.slide h1, .slide h2, .slide h3, .slide h4 { 
+	padding-bottom: 2.2px;
+	border-bottom:  2px solid #004480;
+	color: #004480;
+	-webkit-hyphens: none; 
+	   -moz-hyphens: none; 
+	    -ms-hyphens: none;
+	        hyphens: none; 
+	text-align: center;
+	font-weight: normal;
+  	text-transform: uppercase;
+    line-height: 0.9em;
+    padding-right: 1.6em;
+    padding-left: 1.6em;
+}
+
+.slide h2 { 
+	font-size: 1.3em;
+ }
+
+.slide h3 { 
+	font-size: 1.1em 
+}
+.slide h4 { 
+	font-size: 1em 
+}
+
+.slide h1.title {
+	font-size:      2.8em;
+	padding-top:    2em;
+	padding-bottom: 2.2px;
+	border-bottom:  none !important;
+	text-align: center;
+
+}
+
+.titlepage h1, .titlepage h2, .titlepage h3, .titlepage h4 {
+	border-bottom:  none !important;
+	text-align: center;
+}
+
+.titlepage h3 {
+	font-size: 1em;
+	margin-top: 2em;
+  	text-transform: none;
+}
+
+.titlepage h4 {
+	font-size: 0.8em;
+	margin-top: 1em;
+  	text-transform: none;
+}
+
+.titlepage p {
+	font-size: 0.5em;
+}
+
+.slide.shout h2 {
+    border-bottom: none;
+    font-size: 3.5em;
+    padding-left: 0em;
+    padding-right: 0em;
+}
+
+.slide a {
+	background: transparent;
+}
+
+.slide a:hover {
+	background: #fafaa2;
+}
+
+.slide kbd,.slide code,.slide samp {
+	background: transparent;
+	color: inherit;
+}
+
+dt { font-weight: bold;}
+dd { padding-left: 1.5em;}
+
+dl.plain dt { font-weight: inherit !important;}
+
+.slide table {
+	border: none !important;
+}
+
+.slide table.striped tr:nth-child(even) {
+    background: snow;
+}
+
+.slide pre {
+	font-family: monospace;
+	font-size: 80%;
+	line-height: 1.1em;    
+    white-space: pre !important;
+    color: green;
+}
+
+.slide code {
+	font-family: monospace;
+    font-size: 80%; 
+    color: green;
+}
+
+.slide em {
+	text-decoration: underline;
+}
+
+header a {
+	color: khaki !important;
+}
+
+header p, header h1, header h2, header h3 	{
+	color: snow;
+}
+
+.slide table      { border-collapse: separate;
+             		border-spacing: 0.1em }
+
+
+
+
+
