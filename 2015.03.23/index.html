@@ -1,0 +1,498 @@
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <title>Advancing Portable Documents for the Open Web Platform: EPUB-WEB</title>
+    <style type="text/css">
+      aside {  
+        width: 15em;  
+        float: right;  
+        color: black;  
+        margin-top: 0.5em;  
+        margin-right: 0.5em;  
+        margin-bottom: 0.5em;  
+        margin-left: 0.5em;  
+        padding-top: 0.5em;  
+        padding-right: 0.5em;  
+        padding-bottom: 0.5em;  
+        padding-left: 0.5em;  
+        font-size: 0.9em;
+        background: Lavender;
+        border-left-width: .5em;
+        border-left-style: solid;
+        border-left-color: Orchid;
+      }
+
+      aside > p:first-child:before {  
+        content: "SIDE NOTE: ";
+      }
+
+      figure {
+        margin-top : 0em;
+        margin-bottom: 2em;
+      }
+      .vision {
+        font-style: italic;
+        margin-left: 2em;
+        margin-right: 2em;
+        padding: 0.8em;
+        background: white;
+        border: thin outset black;
+        border-radius: 0.5em;
+        text-align: justify;
+        font-size: 105%;
+      }
+      
+
+    </style>
+
+    <script class="remove">
+      var postProc = {
+        apply: function(c) {
+          //$("<span><a href='http://www.idpf.org'><img height='48' src='idpf.jpg' alt='IDPF'></a> </span>").prependTo($("div.head > p")[0]);
+          //$("<br><br><span> Copyright © 2014 <a href='http://www.idpf.org'>International Publishing Digital Forum™</a> </span>").appendTo("p.copyright")
+          //$("<span>Joint IDPF and   </span>").prependTo("div.head > h2[property='dcterms:issued']");
+          //$("<span>Authors:</span>").prependTo("div.head dt");
+
+          $("div.head dt").text("Authors:");
+
+       }
+      }
+    </script>
+
+
+    <script src="http://www.w3.org/Tools/respec/respec-w3c-common" async="" class="remove"></script>
+    <script class="remove">
+      var respecConfig = {
+         localBiblio: {
+            "EPUB3": {
+                "authors": [
+                  "Garth Conboy",
+                  "Matt Garrish",
+                  "Markus Gylling",
+                  "William McCoy",
+                  "Murata Makoto",
+                  "Daniel Weck"
+                ],
+                "title": "EPUB 3 Overview",
+                "href" : "http://www.idpf.org/epub/301/spec/epub-overview-20140626.html",
+                "rawDate": "2014-06-26",
+                "status" : "Recommended Specification",
+                "publisher": "IDPF"
+            },
+            "OCF": {
+                "authors": [
+                  "James Pritchett",
+                  "Markus Gylling"
+                ],
+                "title": "EPUB Open Container Format (OCF) 3.0",
+                "href" : "http://www.idpf.org/epub/301/spec/epub-ocf-20140626.html",
+                "rawDate": "2014-06-26",
+                "status" : "Recommended Specification",
+                "publisher": "IDPF"
+            },
+            "epubcfi": {
+                "authors": [
+                  "Peter Sorotokin",
+                  "Garth Conboy",
+                  "Brady Duga",
+                  "John Rivlin",
+                  "Don Beaver",
+                  "Kevin Ballard",
+                  "Alastair Fettes",
+                  "Daniel Weck"
+                ],
+                "title": "EPUB Canonical Fragment Identifier (epubcfi) Specification",
+                "href" : "http://www.idpf.org/epub/linking/cfi/epub-cfi-20140626.html",
+                "rawDate": "2014-06-26",
+                "status" : "Recommended Specification",
+                "publisher": "IDPF"
+            },
+            "ODF": {
+                "authors": [
+                  "Michael Brauer",
+                  "Patrick Durusau",
+                  "Gary Edwards",
+                  "David Faure",
+                  "Tom Magliery",
+                  "Daniel Vogelheim"
+                ],
+                "title": "Open Document Format for Office Applications v1.0",
+                "href" : "https://www.oasis-open.org/committees/download.php/12572/OpenDocument-v1.0-os.pdf",
+                "rawDate": "2005-05-01",
+                "status" : "Oasis Standard",
+                "publisher": "Oasis"
+            },
+            "OOXML": {
+                "authors" : [
+                  "ECMA International"
+                ],
+                 "title": "Office Open XML File Formats, ECMA-376",
+                "href" : "http://www.ecma-international.org/publications/standards/Ecma-376.htm",
+                "rawDate": "2012-12",
+                "status" : "Standard ECMA 376",
+                "publisher": "ECMA"
+            },
+
+            "ZIP": {
+                "title": ".ZIP File Format Specification, version 6.3.3",
+                "href" : "http://www.pkware.com/documents/APPNOTE/APPNOTE-6.3.3.TXT",
+                "rawDate": "2012-09-01",
+                "status" : "APPNOTE",
+                "publisher": "Pkware, Inc."
+            },
+            "css-fragments": {
+               "authors": [
+                  "Simon St.Laurent",
+                  "Eric Meyer"
+                ],
+                "title": "Using CSS Selectors as Fragment Identifiers",
+                "href" : "http://simonstl.com/articles/cssFragID.html",
+                "rawDate": "2012-03-02",
+                "status" : "Unofficial Draft"
+            },
+    		    "web-manifest": {
+    		        "title": "Manifest for web application",
+    		        "href" : "https://w3c.github.io/manifest/",
+    		        "rawDate": "2015-02-23",
+    		        "status" : "ED",
+    		        "publisher": "W3C"
+    		    },
+            "web-packaging": {
+                "authors": [
+                  "Jeni Tennison"
+                ],
+                "title": "Packaging on the Web",
+                "href" : "http://www.w3.org/TR/web-packaging/",
+                "rawDate": "2015-01-15",
+                "status" : "WD",
+                "publisher": "W3C"
+            },
+            "PDF": {
+                "authors": [
+                  "Adobe Systems, Inc.,"
+                ],
+                "title": "Adobe Portable Document Format, Version 4.0",
+                "href" : "http://partners.adobe.com/public/developer/en/pdf/PDFReference.pdf",
+                "rawDate": "2001-01",
+                "publisher": "Adobe, Inc."
+            },
+            "ISOPDF": {
+                "authors": [
+                  "International Organization for Standardization"
+                ],
+                "title": "Document management - Electronic document file format for long-term preservation - Part 1: Use of PDF 1.4, ISO 19005-1:2005",
+                "rawDate": "2005-10-01",
+                "publisher": "International Organization for Standardization"
+            },
+            "ONIX": {
+                "authors": [
+                  "EDItEUR"
+                ],
+                "title": "ONIX for Books 3.0.2 Specification",
+                "rawDate": "2014-01-02",
+                "publisher": "EDItEUR"
+            },
+            "CFI": {
+                "authors": [
+                  "Peter Sorotokin, et. al."
+                ],
+                "title": "EPUB Canonical Fragment Identifier (epubcfi) Specification",
+				        "href": "http://www.idpf.org/epub/linking/cfi/epub-cfi.html",
+                "rawDate": "2014-06-26",
+                "publisher": "International Digital Publishing Forum"
+            },
+            "PGT": {
+                "authors": [
+                  "Peter Sorotokin, et. al."
+                ],
+                "title": "EPUB Adaptive Layout",
+				        "href": "http://www.idpf.org/epub/pgt/",
+                "rawDate": "2012-08-08",
+                "publisher": "International Digital Publishing Forum"
+            },
+            "Sigarchian" : "Hajar Ghaem Sigarchian et al. <em>EPUB3 for Integrated and Customizable Representation of a Scientific Publication and its Associated Resources</em>. In: Proceedings of the 4th Workshop on Linked Science 2014. URL: <a href='http://linkedscience.org/wp-content/uploads/2014/10/lisc2014_submission_3.pdf'>http://linkedscience.org/wp-content/uploads/2014/10/lisc2014_submission_3.pdf</a>.",
+
+            "BigJava" : "Cay Horstmann. <em>Big Java Late Objects</em>, John Wiley &amp; Sons, Inc., 2013"
+          },
+
+          // These may become useful if the document gets a more 'official' status
+          postProcess : [ postProc ],
+
+          doRdfa: true,
+          // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
+          specStatus:           "unofficial",
+          
+          // the specification's short name, as in http://www.w3.org/TR/short-name/
+          shortName:            "xxx-xxx",
+
+          // if your specification has a subtitle that goes below the main
+          // formal title, define it here
+          subtitle   :  "White Paper",
+
+          // if you wish the publication date to be other than the last modification, set this
+          publishDate:  "2015-03-23",
+
+          // if the specification's copyright date is a range of years, specify
+          // the start date here:
+          // copyrightStart: "2005"
+
+          // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
+          // and its maturity status
+          // previousPublishDate:  "1977-03-15",
+          // previousMaturity:  "WD",
+
+          // if there a publicly available Editor's Draft, this is the link
+          // edDraftURI:           "http://berjon.com/",
+
+          // if this is a LCWD, uncomment and set the end of its review period
+          // lcEnd: "2009-08-05",
+
+          // editors, add as many as you like
+          // only "name" is required
+          editors:  [
+             {
+                  name:       "Markus Gylling"
+              ,   mailto:     "mgylling@idpf.org"
+              ,   company:    "IDPF"
+              ,   companyURL: "http://idpf.org"
+              },
+              {
+                  name:       "Ivan Herman"
+              ,   mailto:     "ivan@w3.org"
+              ,   company:    "W3C"
+              ,   companyURL: "http://www.w3.org"
+              },
+              {
+                  name:       "Tzviya Siegman"
+              ,   mailto:     "tsiegman@wiley.com"
+              ,   company:    "John Wiley & Sons, Inc."
+              ,   companyURL: "http://www.wiley.com"
+              }
+          ],
+          
+          // name of the WG
+          wg:           "In Charge Of This Document Working Group",
+          
+          // URI of the public WG page
+          wgURI:        "http://example.org/really-cool-wg",
+          
+          // name (without the @w3c.org) of the public mailing to which comments are due
+          wgPublicList: "spec-writers-anonymous",
+          
+          // URI of the patent status for this WG, for Rec-track documents
+          // !!!! IMPORTANT !!!!
+          // This is important for Rec-track documents, do not copy a patent URI from a random
+          // document unless you know what you're doing. If in doubt ask your friendly neighbourhood
+          // Team Contact.
+          wgPatentURI:  "",
+          // !!!! IMPORTANT !!!! MAKE THE ABOVE BLINK IN YOUR HEAD
+      };
+    </script>
+  </head>
+  <body>
+    <section id="abstract">
+      <p>This white paper introduces EPUB-WEB, a vision for the future of digital publishing that is based on a fully native representation of documents within the Open Web Platform. EPUB-WEB achieves full convergence between online and offline/portable document publishing: publishers and users won't need to choose one or the other, but can switch between them dynamically, at will.
+      </p>
+      <p class="note">The name “EPUB-WEB” is used colloquially in this paper.  The eventual effort may choose to use a completely different name that is more evocative of the larger community we want to engage; e.g. “Portable Document”, “Portable Multimedia Document”, “Offline Web Document”, “Multipart Electronic Publication“,… In what follows, for the sake of simplicity, we will use the term “EPUB-WEB”.</p>
+
+     </section>
+    </section>
+    <section id='sotd'>
+      <p>This is a living document which at the time of writing reflects the authors’ opinions only. Comments and suggestions are welcomed, either via the authors’ email addresses (see above) or via the <a href="https://github.com/w3c/epubweb/issues">github issue tracker</a> (with a preference for the latter).</p>
+    </section>
+    <section>
+      <h2 id="introduction">Our Vision</h2>
+
+      <p class="vision">Our vision for EPUB-WEB is that portable documents become fully native citizens of the Open Web Platform.  In this vision, the current format- and workflow-level separation between offline/portable (EPUB) and online (Web) document publishing is diminished to zero. These are merely two dynamic manifestations of the same publication: content authored with online use as the primary mode can easily be saved by the user for offline reading in portable document form. Content authored primarily for use as a portable document can be put online, without any need for refactoring the content. Publishers can choose to utilize either or both of these publishing modes, and users can choose either or both of these consumption modes. Essential features flow seamlessly between online and offline modes; examples include cross-references, user annotations, access to online databases, as well as licensing and rights management.
+      </p>
+
+      <p>A portable document is a collection of content items (e.g. pages, chapters, modules, articles) structured as a single, self-contained logical unit. Individual items can consist of text, images, graphics, possibly interactive mathematical or chemical formulae, as well as audio and video. These documents by definition have a default, linear “reading order”, however the user may choose to skip around in the content just as with a book on paper; alternatively, interactive aspects of the content may alter the reading order on behalf of the user.
+      </p>
+
+      <p>Several portable document formats exist. The only vendor independent and HTML based format is EPUB&nbsp;[[EPUB3]], which emphasizes a dynamic determination of content presentation and a closer alignment with the Open Web Platform. EPUB can represent reflowable contents as well as sequences of final-form fixed pages; depending on the publication type, an EPUB document may default to one of those. EPUB is built on Web Standards, and the individual items that make up an EPUB publication are identical to types of content on a Web site: [[html5]], [[svg]], [[css21]], [[ECMAScript]], [[JPEG]] and [[png]] images, etc. </p>
+
+      <p>EPUB can be viewed as simply defining a specialization of Web content that assures that a collection of content items has the needed properties of completeness and logical structure, and does so in a standard way that other processing tools and services can reliably create, manipulate, and present such collections. This completeness constraint is key for bridging the current gap between an online and offline/portable view of the same content (see <a href="#whynow">section on usage patterns</a> below).
+      </p>
+
+      <p>The differences between the distinguishing characteristics of web documents and portable document can be viewed as situational and gradual rather than as representative of bright-line distinctions. Just as most of the content features of Web pages and portable documents implemented via EPUB are held in common, portable documents and documents on the Web share a desire for occasional or on-demand use of their distinguishing characteristics. Authors of HTML Web pages using CSS for styling may want pagination features. Users of Web sites want the occasional ability to download a part of a Web site for offline use with links intact to both the saved offline content and remaining content that has not been downloaded. Reliable navigation of a Web site would increase usability and accessibility.
+      </p>
+
+      <figure style="text-align: center;" id="epubweb.figure"> <img src="figures/epubweb.png"
+          width="90%"> <figcaption>The same content can be turned into an archived file and back without any inherent changes to the core content or associated digital assets.</figcaption>
+      </figure>
+    </section>
+    <section>
+      <h2 id="whynow">Why work on this now?</h2>
+      <p>EPUB can be considered to be at a tipping point. EPUB has been broadly adopted globally for trade ebooks, and is starting to gain adoption among textbook publishers as well as corporate marketing departments. However, EPUB has largely been seen as an “offline” format up until now. Various browser extensions supporting EPUB exist (Readium in Chrome, EPUB in Firefox, et al.). Other solutions exist for delivering EPUB files in browsers (Readium-Cloud, EPUB.js, Safari Books Online, et al.). Browser- and cloud-based solutions require relatively complex server and/or client software. In many cases browser- and cloud-based solutions depend on a proprietary transformation of the packaged EPUB files into formats more suitable to network delivery. A focused effort to make EPUB a first-class Open web Platform citizen will result in significant reduction in the complexity of deploying EPUB content into browsers for both online and offline consumption. Further, this focused effort will increase the momentum of EPUB and associated web adoption across communities who are looking for an open, non-proprietary, next-generation portable document format.
+      </p>
+
+      <p>The broader Web Platform can also be considered to be at a tipping point. Mobile platform web site use is diminishing in favor of native applications. Hybrid applications that use web content alongside native application technology, and web-technology-based system applications are growing. The specific means of delivering hybrid and web-technology-based system applications is currently proprietary to specific applications frameworks and/or browser platforms. The point of EPUB-WEB is to increase problem solving momentum in package, metadata, and offline support applicable to both portable documents and installed applications. Open and native solutions to replace proprietary packaging, metadata, and offline support are intended to ensure the broadest possible general adoption of the Open Web Platform.
+      </p>
+
+      <p>In many respect, the convergence is already happening. In a number of areas (e.g., educational publications, travel books, etc.) publishers already exploit the advanced possibilities of EPUB3 to produce highly interactive documents whose features are very close to what one is used to on the Web. A good example is <a href="http://bcs.wiley.com/he-bcs/Books?action=index&bcsId=7005&itemId=1118087887">Cay Horstmann’s “Big Java, Late Objects”</a>&nbsp;[[BigJava]] that combines the feel of a traditional book with interactive learning materials that makes it reminiscent of similar, Web based tutorials (see the <a href="http://www.wiley.com/college/sc/horstmann/">video</a> on a companion page for the book). And the converse is also true: tutorial and introductory articles have appeared on the Web that have the quality of traditional publications that one was used to see in a scientific magazine, but combined with the interactive possibilities of the Web (<a href="http://bost.ocks.org/mike/algorithms/">Mike Bostock’s article on visualizing algorithms</a> or <a href="http://worrydream.com/LadderOfAbstraction/">Bret Victor’s article on visualization</a> are just two of several possible examples).</p>
+
+      <p>The convergence of EPUB and the Open Web Platform provides a common set of solutions and opportunities to various stakeholders:
+      </p>
+
+      <section>
+        <h3>Publishers</h3>
+        <p>Book publishers are investing in the development of technical expertise in web technologies. While gaining understanding of technical topics is important to new and future publishing workflows, the lack of communication between the trade publishers and web application developer communities is resulting in unnecessary duplication and investments in effort.</p>
+
+        <p>Collaboration between the web content development and publishing communities will result in major benefits to publishers. Adopting a universal and interoperable format means publishers can concentrate on engaging content authors in the production of high quality content. The web content development community can be relied on to deal with sophisticated technical issues (e.g., CSS, SVG). Potential future web content formats (e.g., 3D rendering) and various interactive web programs (e.g., visualization tools like <a href="http://d3js.org">D3</a>) will naturally flow into the publishing realm through EPUB-WEB, hence increasing publishers' opportunities to sell new content products across the board.</p>
+
+        <p>Realizing new opportunities is a reality for publishers traditionally considered to be on the leading edge of technological advances in working with content. These publishers include <abbr title="Science, Technology, and Medical">STM</abbr> and educational publishing houses, as well as scholarly and journal publishing organizations (see the <a="#schol">section on scholarly publishing</a> in this document).</p>
+
+        <p>A converged platform will support more tools and services and a much larger population of trained practitioners compared to the current state of working in parallel universes.</p>
+      </section>
+
+      <section>
+        <h3 id="schol">Scholarly Journal  and STM Publishers</h3>
+
+        <p>Scholarly journal publishers also provide articles for download these days. The most popular distribution format for journal articles continues to be [[PDF]] as a direct reflection of the scholarly community which highly prioritizes linear text and preservation of print typography. Indeed, the original goal for scholarly publisher to make files available online was to enable readers to download and print content directly, instead of borrowing a paper copy of a journal issue and photocopying relevant articles.</p>
+
+        <p>But things are changing. First of all, Web-only publications become part of the mainstream (e.g., the multidisciplinary <a href="http://www.plosone.org">PLOS ONE</a> or the new <a href="https://peerj.com/computer-science/">PeerJ CompSci</a> journals) with the main content being published with traditional Web technologies like HTML and CSS. And there is much more. Scholarly communication increasingly use additional media such as video, audio, animated graphics, or very large images, and the trend is to consider these as integral parts of the scientific output. (<a href="http://bost.ocks.org/mike/algorithms/">Mike Bostock’s recent article on visualizing algorithms</a> or the “live” presentation of data in a <a href="http://f1000research.com/articles/3-176/v1#f3">paper published by F1000 Research</a> are good examples for the new possibilities.) Furthermore, publishing the scientific <em>data sources</em>, like the results of a sociological survey or measurement output of biochemical experiments in XML or CSV formats, alongside the “main” publication, is also coming to the fore, with some journals and institutions actually requiring a public access to those. Gaining access to all these various media and contents both online and offline is important for scholars, whether the goal is to read the publication on the Web, or to download the papers for various reasons: reading the article offline, inclusion of the paper into bibliographic management systems like <a href="http://www.mendelay.com">Mendeley</a> or <a href="www.zotero.org">Zotero</a>, or peer-reviewing submissions. Any offline format for scholarly purposes should be adapted to these needs.</p>
+
+        <p>EPUB offers a solution to many of the problems (see, e.g., [[Sigarchian]]), and those will be further enhanced by EPUB-WEB. Having an essentially identical online and offline versions of the same content, including the usage of various media, leads to similar reading experiences whether online or offline. User annotations, formal reviews, etc, performed by the scholar on a small, mobile device while being offline can be automatically synchronized with the online version as soon as there is Internet access. Being based on a general archival format, EPUB-WEB provides an easy way to consistently include video, audio, interactive scripts, any kind of data, and can naturally contain active links to the scientific data published elsewhere on the Web in case the data is too large to be distributed offline. These and other possibilities provided by EPUB-WEB may contribute to fundamentally change the way scholarly publishing works.</p>
+      </section>
+
+      <section>
+        <h3>In-house Publishers</h3>
+        <p>A special form of document production is related to technical and/or user documentation of complex products as well as complex administrative documents. Such documents are often akin to STM or scholarly publications edited by traditional trade or scholarly publishers but, often, the sheer quantity and complexity of production, as well as confidentiality requirements, mean that the production are done in-house. In many respects major corporations such as IBM, Intel, Renault, or Boeing, or institutions like the European Commission, the FAO, or the UNESCO have become specialized publishers themselves.</p>
+
+        <p>The quantity of documentation makes it infeasible to produce these documents in print (or print-only); instead, publishing them on the public Web or an Intranet and/or providing them through specialized mobile devices is the viable alternative. The production of these documents has similar challenges to scholarly publications like accessibility issues, portability of annotations, or the possible inclusion of complex media.</p>
+
+        <p>Just as for scientific publications, EPUB-WEB will provide new possibilities for these types of documents. Documentation in EPUB-WEB can be used offline in, for example, a cockpit, while being easily updated through the Web when possible. Inclusion of interactive animation, explanations, etc., become easy thanks to the possibilities provided by the Open Web Platform, whether online or offline.</p>
+      </section>
+
+      <section>
+        <h3>Reading System developers</h3>
+
+        <p>Reading system developers will also benefit. It is already true today that, due to the large scale use of the Open Web Platform technologies in EPUB3, reading systems often rely on existing Web browser “cores”. This means that the development of these reading systems already benefit from a level of synergy insofar as they can rely on software developments done elsewhere. Making EPUB-WEB “native” to browsers will mean that an even larger percentage of the necessary software will be available as part of the “core” and developers can concentrate on book-specific issues such as specialized user interfaces or connection to online bookstores.</p>
+
+        <p>But the main advantage of EPUB-WEB for reading systems is a vastly larger user base. Whilst, today, reading systems are mainly used to read traditional novels, the introduction of EPUB-WEB will open up new possibilities for, e.g., scholarly and educational use, journals and magazines, governmental usage, etc.</p> 
+      </section>
+
+      <section>
+        <h3>Web page designers</h3>
+
+        <p>The synergy between the traditional publishing community and the Web site designers may help in greatly improving the quality of overall Web page design. Indeed, the publishing community has significant experience on issues like ergonomy, complex layout design, paged layout, or user interface problems when consuming, for example, long, elaborate, and mostly linear content. Publishers also have an experience in a proper editorial and curatory workflow in producing content, which can be easily transposed from traditional publishing to Web site production. </p>
+
+        <p>Another aspect of Web page design is its adaption to various environments easily. Creating documents on the Web that could be uncompromisingly displayed both on traditional screens and on mobile devices with varying screen sizes is already a growing trend today; with EPUB-WEB, users will be able to create digitally native documents easily, whether the document is viewed online or offline.</p> 
+      </section>
+
+      <section>
+        <h3>Web browsers</h3>
+
+        <p>Generation of an offline version of a Web page (mainly in terms of very long and complex content) is an area where browsers will benefit from EPUB-WEB. Such a facility is important: when roaming charging are often high, or when internet access may be of a low quality or not available at all, users need the possibility to create, in an ad-hoc and easy manner, an offline version of the Web page they are reading. Several browsers offer such facilities already, albeit in mutually incompatible formats. Making EPUB-WEB native to a browser means to standardize an archive format that can be used through a suitable user interface by anyone using a browser. Also, some of the facilities required by reading systems are also extremely useful for “traditional” Web content; annotation facilities are an obvious example. A joint development will therefore provide a welcome addition to the core browser facilities.</p>
+
+        <p>It must be emphasized, however, that EPUB-WEB is not meant to create an offline version of <em>any</em> Web page; the emphasis is on Web <em>documents</em> and not to, so to say, duplicate the Web. For example, it is not the goal of EPUB-WEB to store the page of a Web-based email client. The exact boundaries and limitations will have to be properly specified alongside the <a href="#arch">work on archival formats</a>.</p>
+
+        <p>Note that, technically, the inclusion of EPUB-WEB capabilities in browsers is a matter of enhancement rather than addition of completely new capabilities: because EPUB-WEB documents are based on the core Web Technologies, the “extras” to make them a native feature of the Web is limited to a smaller set of tasks like handling packages, dealing with features like reading order, dynamic pagination, and displaying tables of contents. An important goal of EPUB-WEB will be to further streamline these tasks, all while making sure it is feasible to include EPUB-WEB content handling even in mobile environments, where the computing and memory limits are more demanding.</p>
+      </section>
+
+      <section>
+        <h3>Libraries and archival services</h3>
+
+        <p>The archiving of digital assets is coming to the fore as a significant issue for dedicated institutions like national libraries. With the arrival of highly dynamic and possibly interactive Web documents as primary content, the traditional means of archiving (i.e., storing an XML or HTML page on some backup device for long term preservation) is no longer adequate. Web documents depend on a multitude of auxiliary files, like CSS style sheets, images, videos, javascript programs, etc. The completeness of an EPUB-WEB document has a significant role to play in this respect: combined with archiving it provides means to store the content offline, making it appropriate for archival purposes. </p>
+      </section> 
+
+      <section>
+        <h3>Users</h3>
+
+        <p>Users will benefit, arguably the most, from a convergence of efforts between EPUB-WEB documents and other uses of Web technologies. Users will have the choice among different reading systems for the same content, ranging from specialized devices to traditional Web Browsers. Beyond the overall qualities of the reading environment the choice can also be made based on the content and usage: whereas a specialized device would work well for reading a novel on the beach, a Web browser or a high-end tablet may be preferred to consume highly interactive educational content in a class room. Publishers do not have to make this decision: users can do that. The same content can also smoothly migrate from one device or system to another, possibly carrying notes, annotations, but also the possibility to fill interactive Web forms offline (and “pushing” the results to its destination when on line again). Features for people with disabilities will also be provided consistently, whether the content is a portable document or a Web page. </p>
+      </section> 
+    </section>
+
+    <section>
+      <h2>Achieving convergence: work areas</h2>
+      <p>Although all effort must be taken to keep as much backward compatibility as possible, the requirement(s) of EPUB-WEB will very likely mean a non-backward compatible transition from EPUB3. That being said, it must be emphasized that the major part of any EPUB3 publication, namely the content, will remain unchanged or will require only minimal changes. Indeed, the content of an EPUB3 file is based on core Open Web Platform technologies, including HTML5, SVG, or CSS3, and this will remain true for EPUB-WEB as well. The bulk of the changes are expected to occur around the accompanying constructs like publication-level metadata records, the spine, or the packaging of the content. In other words, the investments made by publishers into the transition from EPUB2 to EPUB3 (i.e., the move from XHTML1 to HTML5, from CSS2 to CSS3) are certainly not lost: the new changes would be mostly restricted to the implementation details of reading systems and production workflows. The evolution, in the past few years, of online tooling for the production of EPUB content based on the Open Web Platform (e.g., the platforms developed and used by companies like O’Reilly, Hachette, Metrodigi, or Inkling) will greatly facilitate any transition to EPUB-WEB; adapting these tools to EPUB-WEB is expected to be quite straightforward.</p>
+
+      <p>This section lists some of the work areas that EPUB-WEB should engage in. The list is not exhaustive and there are only hints at the technical solutions; one of the main goals of the work ahead will be to clarify the requirements and technical details. It must be emphasized that the solutions to these problems may not come from either IDPF or W3C, but possibly from other, external organizations (document identification is a typical example).</p>
+
+      <section>
+        <h3 id="arch">Generic archive format for the portable/offline state</h3>
+        <p>A variety of formats for offline/archival storage of collections of digital resources exist today [[OCF]], [[ODF]], [[OOXML]], but none of them is universally recognized and supported across ecosystems. EPUB-WEB needs to be based on the definition of an archive format that is generic and native to the Open Web Platform, eventually with read and write support in Web browsers as well as dedicated Reading Systems and authoring tools. (Note that EPUB-WEB has more specific needs than what a general Web page may have, but this should be covered by <em>adding</em> information to a generic format.)</p>
+
+        <p>To achieve interoperability between implementations, EPUB-WEB also needs to define the process for transitioning a publication from the online to the offline/portable (a.k.a. archived) states, and vice versa.  </p>
+
+        <p class="note">W3C’s <a href="http://www.w3.org/2008/webapps/">Web Application Working Group</a> has published a First Working Draft for a Streamable Package Format for the Web[[web-packaging]] to encompass the needs of various applications (like installing Web Applications or downloading data for local processing). It is probably advantageous for EPUB-WEB to adopt this format, thereby being compatible with what Web Browsers may implement anyway. While this general packaging format could hypothetically be compatible with the ZIP+XML manifest format used by EPUB (and also by the Open Document Format [[ODF]]) the broader requirements of installable applications and other types of content, and efficient incremental transmission over networks, may well imply a different and incompatible packaging format.
+        </p>    
+      </section>  
+
+      <section>
+        <h3>Capturing overall publication structure</h3>
+        <p>As outlined above, portable document formats in general tend to include information pertaining to the overall publication structure, such as the logical reading order(s) of the set of resources that comprise the publication (e.g. the “spine” and associated constructs in EPUB), as well as predictable user-facing meta-structures, such as one or several tables of contents or “guides”. EPUB already incorporates definitions of how to express these data based on W3C Standards such as XML and HTML. For EPUB-WEB’s requirements it may be imperative to further optimize these data structures in a way that is even more native to the Open Web Platform and more easily supported in authoring tools, browsers and Reading Systems. The Manifest for web application format [[web-manifest]] is one example of a technology that could potentially be used to achieve this goal.	
+        </p>
+
+        <p class="note">Whilst these information objects are important for larger and/or more complex publications, it is unnecessary for a number of use cases for EPUB-WEB. A typical example is the archival of a document consisting of a single Web page. EPUB-WEB should therefore include the definition of a set of “defaults”, i.e., it should not require the presence of, say, a spine if the publication contains one single HTML file. Such defaults are not currently present in EPUB.</p>
+      </section>
+
+      <section>
+        <h3 id="idf">Document and fragment identification</h3>
+        <p>On the web, HTTP URIs serve as the fundamental method of identifying a resource, or a fragment thereof. Among the various portable document formats available today, there is no equivalent ubiquitous method for identifying a publication that by definition does not have an HTTP address. Within the scholarly publishing industry, for example, initiatives such as <a href="http://www.doi.org">DOI</a> and <a href="http://crossref.org">CROSSREF</a> have addressed this problem by providing explicit URN resolver services, but these services are not used by traditional “trade” publishing that rely more on ISBN related services. Also, for a universally applicable portable document format, unconditionally relying on distinct resolver services is suboptimal for a number of use cases, primarily as these may not be free of charge, and may require registration process that is not be applicable to the use case at hand. </p>
+
+        <p class="note">A typical, and extremely valuable use case is in academic and scholarly publishing. There are currently several methods for citing online works (disputed among style guides), but there is no standard method for citations to ebooks. Even if a reflowable ebook is by a scholar, she must refer to PDF, paper copy, or HTML version to cite it in her bibliography. EPUB-WEB should enable stable citations.</p>
+
+        <p>Today’s EPUB supports a mechanism [[CFI]] for fine-grained references into a publication, but it is not defined in a manner that natively handles transitions between online and offline/portable states.</p>
+
+        <p>EPUB-WEB needs to define a way to utilize URI schemes for identifying documents and/or fragments thereof such that the addressing scheme does not break, nor needs to be changed, when a document transits from online to offline/portable states, or vice versa.  A number of questions arise and need answers, e.g.:</p>
+
+        <ul>        
+          <li>What is the URI of the offline version of the document? How does that URI relate to the online identification of the content?</li>
+
+          <li>How does one identify the instance of a publication that “belongs to”, e.g., a specific person? This may be important if one wants to create and store, e.g., annotation to one’s own “copy” only, as opposed to the content in general.</li>
+          
+          <li>Should there be one URI identifying the content itself, regardless of its format (e.g., whether it is online or offline)? This is akin to the issue of identifying, e.g., a book as a whole, as opposed to its delivery format (i.e., whether it is a printed or electronic).</li>
+        </ul>
+
+        <p>Beyond the identification of the document as a whole, there is a further need for fragment identification, i.e., to identify “anchors” within the document. EPUB-WEB needs to include fragment identification schemes that are agnostic to the online/offline state, and that can address fragments of various kinds (e.g. resources within archives, elements with or without IDs, text ranges, time positions, etc.) and for various media types.</p>
+
+        <p class="note">The <a href="http://www.w3.org/annotation/">W3C Annotation Working Group</a> has a joint deliverable with the <a href="http://www.w3.org/2008/webapps/">W3C Web Application Working Group</a> called “Robust Anchoring”. This deliverable will provide a general framework for anchoring; and, although defined within the framework of annotations, the specification can also be used for other fragment identification use cases. Similarly, the W3C Media Fragments specification&nbsp;[[media-frags]] may prove useful to address some of the use cases. Finally, the Streamable Package Format draft, <a href="#arch">mentioned above</a>, also includes a fragment identification mechanism. Would that package format be adopted for EPUB-WEB, that fragment identification may also come to the fore as an important mechanism to consider.</p>
+      </section>  
+
+      <section>
+        <h3>Metadata: discovery</h3>
+        <p>Throughout the digital publishing industry, highly specialized metadata vocabularies and serialization forms thereof are being used. Within trade publishing as an example, ONIX&nbsp;[[ONIX]] has attained a dominant status as a metadata package that typically travels (in XML form) independently of the publication, and contains not only bibliographic metadata, but also trade information such as pricing. Scholarly publishing uses various derivatives of the ubiquitous BibTeX vocabulary.</p>
+
+        <p>While not contradicting the obvious use cases for out-of-line metadata records as used by publishers, retailers and libraries, EPUB-WEB must define a syntax for basic in-line metadata records that is agnostic to the online and offline modes. This means that the syntax must seamlessly support discovery and harvesting by both generic Web search engines, as well as dedicated bibliographic/archival/retailer systems. While it is expected that EPUB-WEB will define a minimal set of required metadata (cf. the <a href="#idf">section on identities and fragments above</a>), development and adoption of further vocabularies in EPUB-WEB will most likely be deemed as out of scope; in other words: domain-specific metadata requirements are up to the domains themselves to define via a profiling mechanism, or similar yet-to-be-defined means. </p>
+
+        <p class="note">The adoption of HTML as the vehicle for expressing publication-level metadata (i.e., using RDFa&nbsp;[[html-rdfa]] and/or Microdata&nbsp;[[microdata]] for metadata like authors or title) would have the added benefits of better I18N support than XML or JSON formats.</p>
+      </section>
+
+      <section>
+        <h3 id="styling">Styling and Layout, Pagination</h3>
+        <p>As outlined in [[dpub-latinreq]] or [[jlreq]], the Open Web Platform in general, and CSS in particular, is still lacking solutions for meeting all of the publishers’ expectations on satisfactory typography and layout for digital publications. While improved presentation fidelity will be of paramount importance to the overall success and adoption rate of EPUB-WEB, it is clear that many of these issues are going to be addressed on a case-by-case basis by the CSS WG over a longer period of time. STM publishing, for example, where the faithful representation and rendering of, e.g., mathematical or chemical formulae is of a paramount importance, has particularly severe requirements that must be fulfilled by the Open Web Platform technologies. Similarly, dynamic pagination of reflowable content is not natively supported by browsers today, and as a result EPUB Reading System developers are forced to implement pagination using various ad-hoc approaches, all coming with a significant penalty in terms of development costs, performance and stability.</p>
+
+        <p>It is anticipated that native support for pagination (in CSS and/or in the DOM) is going to be put forward by stakeholders as a critical component of EPUB-WEB; thus the finalization of EPUB-WEB may be contingent on the availability of a native pagination model for Web content. Today’s EPUB does not define a particular pagination model for reflowable content (although work has been done on this, leading to the experimental EPUB Adaptive Layout specification [[PGT]] that has informed subsequent related work in CSS WG).</p>
+      </section>
+
+      <section>
+        <h3>Security and privacy models</h3>
+
+        <p>The security model of the Web, based primarily on the same-origin policy and the concept of “site”, does not apply to portable documents, as the notion of “origin” is based on HTTP properties that are invalidated/non-existent when a document transitions from its online state to the portable state. EPUB-WEB must incorporate a state agnostic security and privacy model that defines rules for both the online and portable states.</p>
+      </section>
+
+      <section>
+        <h3>Presentation Control and Personalization</h3>
+
+        <p>When reading long-form (and sometimes mission-critical) publications, personalization — i.e. the ability for users to adapt the presentation to suit their needs — is of a paramount importance. While technologies such as CSS Media Queries have come a long way in terms of adapting content to devices, this is not the same thing as adapting to a user. Presentation control features are often available in EPUB Reading Systems, for example the possibility to dynamically change font size or background/foreground color schemes, but implementations are brittle and limited due to the lack of an underlying framework that explicitly supports user adaptation.</p> 
+
+        <p>EPUB-WEB needs to incorporate an explicit framework for achieving advanced and predictable user-triggered presentation control. (Note that from this perspective, accessibility can be seen just a radical case of personalization.)</p> 
+      </section>
+
+      <section>
+        <h3>Models for embracing domain-specific restrictions and extensions</h3>
+
+        <p>Different domains of digital publishing have vastly different expectations and/or requirements on the nature of the content and their presentation. In the digital comics domain for example, the default presentation form is, traditionally at least, pre-paginated, fixed-form, and image-based media, possibly with a set of omnipresent (i.e., cross-publisher) user interaction patterns that are expected to be enabled. On the other hand, for trade publishing the default form is fully reflowable content, where user interaction patterns are defined entirely by the user agent. In educational publishing, the ability to control structure, to include rich domain-specific structural semantics and extensive specialized metadata, are at the basis for enhanced reading system behaviors, as well as predictable content discovery and repurposing. </p>
+
+        <p>To allow for the predictability of content within those domains that need it, EPUB-WEB needs to incorporate a notion of “profiles” that content can be authored and validated against, and that user agent implementations can use to trigger enhanced behaviors, if any. To allow for agile feature-set extensions and innovation, EPUB-WEB profiles also needs to embrace the notion of “feature addons” that can be included by a publisher without risking to invalidate the integrity and functionality of the basic publication.</p>
+      </section>
+    </section>
+    <section>
+      <h2>Conclusions</h2>
+      <p>This White Paper outlines a vision for the convergence between the Open Web Platform and portable documents while also significantly advancing and expanding the existing EPUB ecosystem. The realization of this vision would require a strong cooperation between the traditional publishing and Web communities, ideally based on a close collaboration between IDPF and the W3C and potentially other relevant organizations. While it is envisaged that most of the work could be done in one or more dedicated Working Groups (within IDPF and/or W3C), it must be emphasized that many of the features will affect and will be affected by work done elsewhere, within or outside these organizations. The starting point will be to explore and plan for the detailed technical challenges to gain a better insight into the work ahead; this exploration should be done together with the various interested communities.   
+      </p>
+    </section>
+  </body>
+</html>
