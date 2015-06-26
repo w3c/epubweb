@@ -61,7 +61,7 @@
     </script>
 
 
-    <script src="http://www.w3.org/Tools/respec/respec-w3c-common" async="" class="remove"></script>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" async="" class="remove"></script>
     <script class="remove">
       var respecConfig = {
          localBiblio: {
@@ -213,7 +213,32 @@
             },
             "Sigarchian" : "Hajar Ghaem Sigarchian et al. <em>EPUB3 for Integrated and Customizable Representation of a Scientific Publication and its Associated Resources</em>. In: Proceedings of the 4th Workshop on Linked Science 2014. URL: <a href='http://linkedscience.org/wp-content/uploads/2014/10/lisc2014_submission_3.pdf'>http://linkedscience.org/wp-content/uploads/2014/10/lisc2014_submission_3.pdf</a>.",
 
-            "BigJava" : "Cay Horstmann. <em>Big Java Late Objects</em>, John Wiley &amp; Sons, Inc., 2013"
+            "BigJava" : "Cay Horstmann. <em>Big Java Late Objects</em>, John Wiley &amp; Sons, Inc., 2013",
+
+            "web-workers" : {
+                "authors": [
+                  "Ian Hickson"
+                ],
+                "title": "Web Workers",
+                "href" : "https://w3c.github.io/workers/",
+                "rawDate": "2015-05-19",
+                "status" : "ED",
+                "publisher": "W3C"
+            },
+
+            "service-workers" : {
+                "authors": [
+                  "Alex Russel",
+                  "Jungkee Song",
+                  "Jake Archibald"
+                ],
+                "title": "Service Workers",
+                "href" : "https://slightlyoff.github.io/ServiceWorker/spec/service_worker/",
+                "rawDate": "2015-05-25",
+                "status" : "ED",
+                "publisher": "W3C"
+
+            }
           },
 
           // These may become useful if the document gets a more 'official' status
@@ -411,23 +436,39 @@
       <p>This section lists some of the work areas that EPUB+WEB should engage in. The list is not exhaustive and there are only hints at the technical solutions; one of the main goals of the work ahead will be to clarify the requirements and technical details. It must be emphasized that the solutions to these problems may not come from either IDPF or W3C, but possibly from other, external organizations (document identification is a typical example).</p>
 
       <section>
-        <h3 id="arch">Generic archive format for the portable/offline state</h3>
-        <p>A variety of formats for offline/archival storage of collections of digital resources exist today [[OCF]], [[ODF]], [[OOXML]], but none of them is universally recognized and supported across ecosystems. EPUB+WEB needs to be based on the definition of an archive format that is generic and native to the Open Web Platform, eventually with read and write support in Web browsers as well as dedicated Reading Systems and authoring tools. (Note that EPUB+WEB has more specific needs than what a general Web page may have, but this should be covered by <em>adding</em> information to a generic format.)</p>
+        <h3 id="arch">General architecture for portable/offline and online states</h3>
 
-        <p>To achieve interoperability between implementations, EPUB+WEB also needs to define the process for transitioning a publication from the online to the offline/portable (a.k.a. archived) states, and vice versa.  </p>
+        <p>The latest evolution of browser technologies around Web Workers[[web-workers]] and Service Workers[[service-workers]] may fundamentally change the way browsers operate in terms of offline/online. Service Workers will provide a flexible and programmable way to efficiently implement local caching of Web resources. Caching is implemented as a programmable network proxy, meaning that the browser’s rendering engine becomes oblivious on whether a resource originates from the local cache or diretly from the network. </p>
 
-        <p class="note">W3C’s <a href="http://www.w3.org/2008/webapps/">Web Application Working Group</a> has published a First Working Draft for a Streamable Package Format for the Web[[web-packaging]] to encompass the needs of various applications (like installing Web Applications or downloading data for local processing). It is probably advantageous for EPUB+WEB to adopt this format, thereby being compatible with what Web Browsers may implement anyway. While this general packaging format could hypothetically be compatible with the ZIP+XML manifest format used by EPUB (and also by the Open Document Format [[ODF]]) the broader requirements of installable applications and other types of content, and efficient incremental transmission over networks, may well imply a different and incompatible packaging format.
-        </p>  
+        <p id="sworkers">This evolution makes it particularly timely to bring online and offline/portable documents under the same abstraction and provides with a possible realization strategy for EPUB+WEB. Indeed, in this approach, EPUB+WEB can be considered, conceptually, as a general abstraction, as a <em>Web Publication</em>, identified with a URI, and representing <em>a collection of Web resources</em> (i.e., HTML, CSS, SVG, etc., files). When the publication is requested via its URI the server may return either a high level description of the publication (essentially listing the resources that are logically bundled together by the publication) or return a packaged version thereof in some packaging format (e.g., if those resource happen to be physically stored in a file). The client, more exactly the rendering part thereof (let us refer to it as the “reading system”) is oblivious to this difference and only deals with the logical references (URI-s) of the constituent resources. Essentially, the reading system would behave as if all resources were simply Web resources. Reading the content will also remain possible if the client is off-line.</p>
 
-        <p class="note">The IETF has published an <a href="https://tools.ietf.org/html/draft-seantek-kerwin-arcmedia-type-01">informational draft on a top-level media type for archives</a>. Although that draft does not specify a specific archive format it shows the overall interest in packaging on the Web, in line with the concerns of EPUB+WEB.</p>  
-      </section>  
+        <p>This strategy is made available through a specialized Service Worker[[service-workers]] in the client. When accessing the Web Publication for the first time, this “EPUB+WEB” Worker would either directly cache the resources, if retrieved through traditional HTTP requests, or unpack the incoming package and store the resulting resources in the same cache (the package may also be originating from the local file system). All subsequent network accesses, originating from the reading system, will be proxied through the “EPUB+WEB” Worker, accessing the content in local cache. The access to the cache will be done transparently to the reading system.</p>
 
-      <section>
-        <h3>Capturing overall publication structure</h3>
-        <p>As outlined above, portable document formats in general tend to include information pertaining to the overall publication structure, such as the logical reading order(s) of the set of resources that comprise the publication (e.g. the “spine” and associated constructs in EPUB), as well as predictable user-facing meta-structures, such as one or several tables of contents or “guides”. EPUB already incorporates definitions of how to express these data based on W3C Standards such as XML and HTML. For EPUB+WEB’s requirements it may be imperative to further optimize these data structures in a way that is even more native to the Open Web Platform and more easily supported in authoring tools, browsers and Reading Systems. The Manifest for web application format [[web-manifest]] is one example of a technology that could potentially be used to achieve this goal.	
-        </p>
+        <p>Of course many of the details have to be worked, taking also into accoount that the Web Workers[[web-workers]] and Service Workers[[service-workers]] specifications are not finalized yet.</p> 
 
-        <p class="note">Whilst these information objects are important for larger and/or more complex publications, it is unnecessary for a number of use cases for EPUB+WEB. A typical example is the archival of a document consisting of a single Web page. EPUB+WEB should therefore include the definition of a set of “defaults”, i.e., it should not require the presence of, say, a spine if the publication contains one single HTML file. Such defaults are not currently present in EPUB.</p>
+        <section>
+          <h4>General Archive formats for the portable/offline state</h4>
+
+          <p id="sworkers">Regardless of the details or the EPUB+WEB architecture, an archive format is necessary for the storage of a publication as one file (e.g., for distribution). A variety of formats for offline/archival storage of collections of digital resources exist today [[OCF]], [[ODF]], [[OOXML]], but none of them is universally recognized and supported across ecosystems. Depending on the general architecture, EPUB+WEB may continue using the current EPUB packaging format (based on [[OCF]])) or it may need to be based on the definition of an archive format that is generic and native to the Open Web Platform. </p>
+
+          <div class="note">
+            <p>W3C’s <a href="http://www.w3.org/2008/webapps/">Web Application Working Group</a> has published a First Working Draft for a Streamable Package Format for the Web[[web-packaging]] to encompass the needs of various applications (like installing Web Applications or downloading data for local processing). It is may become advantageous for EPUB+WEB to adopt this format, thereby being compatible with what Web Browsers may implement anyway. While this general packaging format could hypothetically be compatible with the ZIP+XML manifest format used by EPUB (and also by the Open Document Format [[ODF]]) the broader requirements of installable applications and other types of content, and efficient incremental transmission over networks, may well imply a different and incompatible packaging format.
+            </p>  
+
+            <p>The IETF has published an <a href="https://tools.ietf.org/html/draft-seantek-kerwin-arcmedia-type-01">informational draft on a top-level media type for archives</a>. Although that draft does not specify a specific archive format it shows the overall interest in packaging on the Web, in line with the concerns of EPUB+WEB.</p> 
+          </div> 
+        </section>
+
+        <section>
+          <h3>Capturing overall publication structure</h3>
+
+          <p>Portable document formats usually include information pertaining to the overall publication structure, such as the logical reading order(s) of the set of resources that comprise the publication (e.g. the “spine” and associated constructs in EPUB), as well as predictable user-facing meta-structures, such as one or several tables of contents or “guides”. EPUB already incorporates definitions of how to express these data based on W3C Standards such as XML and HTML. For EPUB+WEB’s requirements it may be imperative to further optimize these data structures in a way that is even more native to the Open Web Platform and more easily supported in authoring tools, browsers, and Reading Systems. If the vision based on Service Workers, as <a href="#sworkers">outlined above</a>, becomes the approach chosen for EPUB+WEB, that overall structural information may be what a client would return on a request for an EPUB+WEB instance, as an abstraction for a collection of Web resources.</p>
+
+          <p>The Manifest for web application format [[web-manifest]] is one example of a technology that could potentially be used to achieve this goal.</p>
+
+          <p class="note">Whilst these information objects are important for larger and/or more complex publications, it is unnecessary for a number of use cases for EPUB+WEB. A typical example is the archival of a document consisting of a single Web page. EPUB+WEB should therefore include the definition of a set of “defaults”, i.e., it should not require the presence of, say, a spine if the publication contains one single HTML file. Such defaults are not currently present in EPUB.</p>
+        </section>
+
       </section>
 
       <section>
@@ -450,12 +491,14 @@
 
         <p>Beyond the identification of the document as a whole, there is a further need for fragment identification, i.e., to identify “anchors” within the document. EPUB+WEB needs to include fragment identification schemes that are agnostic to the online/offline state, and that can address fragments of various kinds (e.g. resources within archives, elements with or without IDs, text ranges, time positions, etc.) and for various media types.</p>
 
+        <p class="note">If the structure for EPUB+WEB is based on Service Workers, as <a href="#sworkers">outlined above</a>, the usual fragment identifiers, as used on the Web, may be adopted and used without any further modifications.</p>
+
         <p class="note">The <a href="http://www.w3.org/annotation/">W3C Annotation Working Group</a> has a joint deliverable with the <a href="http://www.w3.org/2008/webapps/">W3C Web Application Working Group</a> called “Robust Anchoring”. This deliverable will provide a general framework for anchoring; and, although defined within the framework of annotations, the specification can also be used for other fragment identification use cases. Similarly, the W3C Media Fragments specification&nbsp;[[media-frags]] may prove useful to address some of the use cases. Finally, the Streamable Package Format draft, <a href="#arch">mentioned above</a>, also includes a fragment identification mechanism. Would that package format be adopted for EPUB+WEB, that fragment identification may also come to the fore as an important mechanism to consider.</p>
       </section>  
 
       <section>
         <h3>Metadata: discovery</h3>
-        <p>Throughout the digital publishing industry, highly specialized metadata vocabularies and serialization forms thereof are being used. Within trade publishing as an example, ONIX&nbsp;[[ONIX]] has attained a dominant status as a metadata package that typically travels (in XML form) independently of the publication, and contains not only bibliographic metadata, but also trade information such as pricing. Scholarly publishing uses various derivatives of the ubiquitous BibTeX vocabulary.</p>
+        <p>Throughout the digital publishing industry, highly specialized metadata vocabularies and serialization forms thereof are being used. Within book trade publishing as an example, ONIX&nbsp;[[ONIX]] has attained a dominant status as a metadata package that typically travels (in XML form) independently of the publication, and contains not only bibliographic metadata, but also trade information such as pricing. Scholarly publishing, on the other hand, uses various derivatives of the ubiquitous BibTeX vocabulary.</p>
 
         <p>While not contradicting the obvious use cases for out-of-line metadata records as used by publishers, retailers and libraries, EPUB+WEB must define a syntax for basic in-line metadata records that is agnostic to the online and offline modes. This means that the syntax must seamlessly support discovery and harvesting by both generic Web search engines, as well as dedicated bibliographic/archival/retailer systems. While it is expected that EPUB+WEB will define a minimal set of required metadata (cf. the <a href="#idf">section on identities and fragments above</a>), development and adoption of further vocabularies in EPUB+WEB will most likely be deemed as out of scope; in other words: domain-specific metadata requirements are up to the domains themselves to define via a profiling mechanism, or similar yet-to-be-defined means. </p>
 
