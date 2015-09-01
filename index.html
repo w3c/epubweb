@@ -4,29 +4,6 @@
     <meta content="text/html; charset=utf-8" http-equiv="content-type">
     <title>Advancing Portable Documents for the Open Web Platform: EPUB+WEB</title>
     <style type="text/css">
-      aside {  
-        width: 15em;  
-        float: right;  
-        color: black;  
-        margin-top: 0.5em;  
-        margin-right: 0.5em;  
-        margin-bottom: 0.5em;  
-        margin-left: 0.5em;  
-        padding-top: 0.5em;  
-        padding-right: 0.5em;  
-        padding-bottom: 0.5em;  
-        padding-left: 0.5em;  
-        font-size: 0.9em;
-        background: Lavender;
-        border-left-width: .5em;
-        border-left-style: solid;
-        border-left-color: Orchid;
-      }
-
-      aside > p:first-child:before {  
-        content: "SIDE NOTE: ";
-      }
-
       figure {
         margin-top : 0em;
         margin-bottom: 2em;
@@ -42,10 +19,9 @@
         text-align: justify;
         font-size: 105%;
       }
-      
-
     </style>
 
+    <!--
     <script class="remove">
       var postProc = {
         apply: function(c) {
@@ -59,7 +35,7 @@
        }
       }
     </script>
-
+    -->
 
     <script src="https://www.w3.org/Tools/respec/respec-w3c-common" async="" class="remove"></script>
     <script class="remove">
@@ -242,25 +218,25 @@
           },
 
           // These may become useful if the document gets a more 'official' status
-          postProcess : [ postProc ],
+          // postProcess : [ postProc ],
 
-          doRdfa: true,
+          doRdfa: "true",
           // specification status (e.g. WD, LCWD, WG-NOTE, etc.). If in doubt use ED.
-          specStatus:           "unofficial",
+          specStatus:           "ED",
           
           // the specification's short name, as in http://www.w3.org/TR/short-name/
-          shortName:            "xxx-xxx",
+          shortName:            "dpub-web",
 
           // if your specification has a subtitle that goes below the main
           // formal title, define it here
-          subtitle   :  "White Paper",
+          // subtitle   :  "White Paper",
 
           // if you wish the publication date to be other than the last modification, set this
-          publishDate:  "2015-06-30",
+          // publishDate:  "2015-06-30",
 
           // if the specification's copyright date is a range of years, specify
           // the start date here:
-          // copyrightStart: "2005"
+          copyrightStart: "2014",
 
           // if there is a previously published draft, uncomment this and set its YYYY-MM-DD date
           // and its maturity status
@@ -268,7 +244,7 @@
           // previousMaturity:  "WD",
 
           // if there a publicly available Editor's Draft, this is the link
-          // edDraftURI:           "http://berjon.com/",
+          edDraftURI:           "http://w3c.github.io/epubweb/",
 
           // if this is a LCWD, uncomment and set the end of its review period
           // lcEnd: "2009-08-05",
@@ -297,13 +273,41 @@
           ],
           
           // name of the WG
-          wg:           "In Charge Of This Document Working Group",
+          wg:           "Digital Publishing Interest Group",
           
           // URI of the public WG page
-          wgURI:        "http://example.org/really-cool-wg",
+          wgURI:        "http://www.w3.org/dpub/IG/",
           
           // name (without the @w3c.org) of the public mailing to which comments are due
-          wgPublicList: "spec-writers-anonymous",
+          wgPublicList: "public-digipub-ig",
+
+          noRecTrack : "true",
+
+          otherLinks: [
+            {
+              key: "Repository",
+              data: [{
+                value: "Github Repository",
+                href: "https://github.com/w3c/epubweb"
+              }]
+            },
+            {
+              key: "Issues tracker",
+              data: [{
+                value: "Github Issue Tracker",
+                href: "https://github.com/w3c/epubweb/issues"
+              }]
+            }
+          ],
+
+          alternateFormats: [
+            {
+              uri: "dpub-web.epub",
+              label: "ePub"
+            }
+          ],
+
+          charterDisclosureURI : "http://www.w3.org/2004/01/pp-impl/64149/status",
           
           // URI of the patent status for this WG, for Rec-track documents
           // !!!! IMPORTANT !!!!
@@ -323,9 +327,13 @@
 
      </section>
     </section>
+
+    
     <section id='sotd'>
-      <p>This is a living document which at the time of writing reflects the authors’ opinions only. Comments and suggestions are welcomed, either via the authors’ email addresses (see above) or via the <a href="https://github.com/w3c/epubweb/issues">github issue tracker</a> (with a preference for the latter).</p>
+      <p>This document outlines a general vision and should not be considered a technical specification. Instead, its goal is to outline the general vision and the possible technical directions to achieve it; more detailed technical work should be documented in separate documents. </p>
     </section>
+    
+
     <section>
       <h2 id="introduction">Our Vision</h2>
 
@@ -343,10 +351,12 @@
       <p>The differences between the distinguishing characteristics of web documents and portable document can be viewed as situational and gradual rather than as representative of bright-line distinctions. Just as most of the content features of Web pages and portable documents implemented via EPUB are held in common, portable documents and documents on the Web share a desire for occasional or on-demand use of their distinguishing characteristics. Authors of HTML Web pages using CSS for styling may want pagination features. Users of Web sites want the occasional ability to download a part of a Web site for offline use with links intact to both the saved offline content and remaining content that has not been downloaded. Reliable navigation of a Web site would increase usability and accessibility.
       </p>
 
-      <figure style="text-align: center;" id="epubweb.figure"> <img src="figures/epubweb.svg"
-          width="100%"> <figcaption>The same content can be turned into an archived file and back without any inherent changes to the core content or associated digital assets.</figcaption>
+      <figure style="text-align: center;" id="epubweb.figure"> 
+        <img src="figures/epubweb.svg" width="70%"> 
+        <figcaption>The same content can be turned into an archived file and back without any inherent changes to the core content or associated digital assets.</figcaption>
       </figure>
     </section>
+
     <section>
       <h2 id="whynow">Why work on this now?</h2>
       <p>EPUB can be considered to be at a tipping point. EPUB has been broadly adopted globally for trade ebooks, and is starting to gain adoption among textbook publishers as well as corporate marketing departments. However, EPUB has largely been seen as an “offline” format up until now. Various browser extensions supporting EPUB exist (Readium in Chrome, EPUB in Firefox, et al.). Other solutions exist for delivering EPUB files in browsers (Readium-Cloud, EPUB.js, Safari Books Online, et al.). Browser- and cloud-based solutions require relatively complex server and/or client software. In many cases browser- and cloud-based solutions depend on a proprietary transformation of the packaged EPUB files into formats more suitable to network delivery. A focused effort to make EPUB a first-class Open web Platform citizen will result in significant reduction in the complexity of deploying EPUB content into browsers for both online and offline consumption. Further, this focused effort will increase the momentum of EPUB and associated web adoption across communities who are looking for an open, non-proprietary, next-generation portable document format.
