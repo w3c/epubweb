@@ -514,21 +514,21 @@
           <ul>
             <li>With regard to resource organization, a <a>Portable Web Document</a> can be in a:
               <ul>
-                <li><dfn data-lt="Packed State|packed state">Packed State</dfn>, when all constituents <a>Web Resources</a> are combined into one unit for, e.g., storage in a file system, network transfer, etc</li>
-                <li><dfn data-lt="Unpacked State|unpacked state">Unpacked State</dfn>, when all constituent <a>Web Resources</a> are directly accessible individually through standard network protocols like HTTP(S), FTP, etc., or through direct file system access.</li>
+                <li><dfn data-lt="Packed State|packed state|packed|Packed">Packed State</dfn>, when all constituents <a>Web Resources</a> are combined into one unit for, e.g., storage in a file system, network transfer, etc</li>
+                <li><dfn data-lt="Unpacked State|unpacked state|unpacked|Unpacked">Unpacked State</dfn>, when all constituent <a>Web Resources</a> are directly accessible individually through standard network protocols like HTTP(S), FTP, etc., or through direct file system access.</li>
               </ul>
             </li>
             <li>With regard to access, a <a>Portable Web Document</a> can be in a:
               <ul>
-                <li><dfn data-lt="Online State|online state">Online State</dfn>, when the document can be accessed through standard network protocols, like HTTP(S) or FTP</li>
-                <li><dfn data-lt="Offline State|offline state">Offline State</dfn>, when the document can be accessed through the local file system access, as provided by the local operating system.</li>
+                <li><dfn data-lt="Online State|online state|online|Online">Online State</dfn>, when the document can be accessed through standard network protocols, like HTTP(S) or FTP.</li>
+                <li><dfn data-lt="Offline State|offline state|offline|Offline">Offline State</dfn>, when the document can be accessed through the local file system access, as provided by the local operating system, or through a user agent cache.</li>
               </ul>
             </li>
           </ul>
 
           <p class="note">These definitions mean that a Portable Web Document stored on a local disc, but accessed through HTTP running on a local machine (i.e., through an <code>http://localhost/…</code> URL) is considered to be “online”.</p>
 
-          <p>The following table gives some typical examples for various combination of states a <a>Portable Web Document</a> can be in:</p>
+          <p>The following table gives some typical examples for various combination of states that a <a>Portable Web Document</a> can be in:</p>
 
           <table class="zebra">
             <tr>
@@ -538,28 +538,23 @@
             </tr>
             <tr>
               <th style="text-align:left">Packed</th>
-              <td>PWD as one file on local disc</td>
-              <td>PWD as one file on a server</td>
+              <td>PWD as a package (e.g., ZIP or OCF) on a local disc</td>
+              <td>PWD as a package (e.g., ZIP or OCF) on a server</td>
             </tr>
             <tr>
               <th style="text-align:left">Unpacked</th>
-              <td>PWD as files in a folder on local disc</td>
+              <td>PWD as files in a folder on a local disc</td>
               <td>PWD as files in a folder on a server <br>(or on local disc accessed through local server)</td>
             </tr>
           </table>
-
-
        </section>
-
-
-
     </section>
 
     <section>
       <h2>Achieving convergence: work areas</h2>
-      <p>Although all effort must be taken to keep as much backward compatibility as possible, the requirement(s) of Portable Web Documents will very likely mean a non-backward compatible transition from other formats like EPUB&nbsp;3.</p>
+      <p>Although all effort must be taken to keep as much backward compatibility as possible, the requirement(s) of <a>Portable Web Documents</a> will very likely mean a non-backward compatible transition from other formats like, e.g., EPUB&nbsp;3.</p>
 
-      <p>This section lists some of the work areas that Portable Web Documents should engage in. The list is not exhaustive and there are only hints at the technical solutions; one of the main goals of the work ahead will be to clarify the requirements and technical details. It must be emphasized that the solutions to these problems may not come from either IDPF or W3C, but possibly from other, external organizations (document identification is a typical example).</p>
+      <p>This section lists some of the work areas that <a>Portable Web Documents</a> should engage in. The list is not exhaustive and there are only hints at the technical solutions; one of the main goals of the work ahead will be to clarify the requirements and technical details. It must be emphasized that the solutions to these problems may not come from either IDPF or W3C, but possibly from other, external organizations (document identification is a typical example).</p>
 
       <p class="note">
         It must be emphasized, however, that the major part of any EPUB&nbsp;3 publication, namely the content, will remain unchanged or will require only minimal changes: the bulk of the changes are expected to occur around the accompanying constructs like publication-level metadata records, the spine, or the packaging of the content. The content of an EPUB&nbsp;3 file is based on core Open Web Platform technologies including HTML5, SVG, or CSS3, and this will remain true for Portable Web Documents as well. EPUB&nbsp;3 files can also contain many other types of files, like images, audio and video, metadata files (e.g., to describe provenance), executable code in <a href="http://www.ecma-international.org/ecma-262/6.0/index.html">JavaScript</a>, <a href="http://ipython.org/">iPython</a>, <a href="https://jupyter.org/">Jupyter</a>, or <a href="http://www.maplesoft.com/products/maple/">Maple</a> scripts, or datafiles in various formats. All these should be available and possible, unchanged, in Portable Web Documents, too. In other words, the investments made by publishers into the transition from EPUB&nbsp;2 to EPUB&nbsp;3 (i.e., the move from XHTML1 to HTML5, from CSS2 to CSS3) are certainly not lost: the new changes would be mostly restricted to the implementation details of reading systems and production workflows. The evolution of the past few years of online tooling for the production of EPUB content based on the Open Web Platform (e.g., the platforms developed and used by companies like O’Reilly, Hachette, Metrodigi, or Inkling) will also greatly facilitate any transition to Portable Web Documents; adapting these tools to Portable Web Documents is expected to be quite straightforward.
@@ -568,28 +563,26 @@
       <section>
         <h3 id="arch">General Architecture for Online/Offline Publications</h3>
 
-        <p>The latest evolution of browser technologies around Web Workers[[web-workers]] and Service Workers[[service-workers]] may fundamentally change the way browsers operate in terms of offline/online. Service Workers will provide a flexible and programmable way to efficiently implement local caching of Web resources. Caching is implemented as a programmable network proxy, meaning that the browser’s rendering engine becomes oblivious on whether a resource originates from the local cache or diretly from the network. </p>
+        <p>The latest evolution of browser technologies around Web Workers[[web-workers]] and Service Workers[[service-workers]] may fundamentally change the way browsers operate in terms of offline/online. Service Workers will provide a flexible and programmable way to efficiently implement local caching of <a>Web Resources</a>. Caching is implemented as a programmable network proxy, meaning that the browser’s rendering engine becomes oblivious on whether a resource originates from the local cache or diretly from the network. </p>
 
-        <p id="sworkers">This evolution makes it particularly timely to bring online and offline/portable documents under the same abstraction and provides with a possible realization strategy for Portable Web Documents. Indeed, in this approach, Portable Web Documents a general abstraction identified with a URI, and representing <em>a collection of Web resources</em> (i.e., HTML, CSS, SVG, etc., files). When the publication is requested via its URI the server may return either a high level description of the publication (essentially listing the resources that are logically bundled together by the publication) or return a packaged version thereof in some packaging format (e.g., if those resource happen to be physically stored in a file). The client, more exactly the rendering part thereof (let us refer to it as the “user agent”) is oblivious to this difference and only deals with the logical references (URI-s) of the constituent resources. Essentially, the user agent would behave as if all resources were simply Web resources. Reading the content will also remain possible if the client is off-line.</p>
-
-        <p>This strategy is made available through a specialized Service Worker[[service-workers]] in the client. When accessing the (Portable) Web Document for the first time, this “Portable Web Documents Worker” would either directly cache the resources, if retrieved through traditional HTTP requests, or unpack the incoming package and store the resulting resources in the same cache (the package may also be originating from the local file system). All subsequent network accesses, originating from the reading system, will be proxied through the “Portable Web Documents Worker”, accessing the content in local cache. The access to the cache will be done transparently to the reading system.</p>
+        <p id="sworkers">This evolution makes it particularly to bring <a>Portable Web Documents</a> under the same abstraction of a <a>Web Resource</a> identified with a URI. A specialized service worker can cache resources, i.e., can bridge the differences between the <a>offline</a> and <a>online</a> states of a document. Furthermore, by adding additional functionalities to the service worker, it can also deal with possible packaging and unpackaging; i.e., it can also bridge the difference between <a>packed</a> and <a>unpacked</a> state. In other words, the core rendering engine of a user agent can operate as if the <a>Portable Web Document</a> was in an <a>online</a> and <a>unpacked</a> stage, and differences were handled by the service worker acting as a proxy.</p>
 
         <p>Of course many of the details have to be worked, taking also into accoount that the Web Workers[[web-workers]] and Service Workers[[service-workers]] specifications are not finalized yet.</p> 
 
         <figure style="text-align: center;" id="workers_basic"> 
           <img src="figures/Workers-basic.png" width="70%"> 
-          <figcaption>Accessing an unpacked <a>Portable Web Document</a> directly from the Web. (Picture is available directly <a href="figures/Workers-basic.svg">SVG</a> or <a href="figures/Workers-basic.png">PNG</a> formats.)</figcaption>
+          <figcaption>Accessing an <a>unpacked</a> <a>Portable Web Document</a> directly from the Web. (Picture is available directly <a href="figures/Workers-basic.svg">SVG</a> or <a href="figures/Workers-basic.png">PNG</a> formats.)</figcaption>
         </figure>
 
         <figure style="text-align: center;" id="workers_package"> 
           <img src="figures/Workers-package.png" width="70%"> 
-          <figcaption>Accessing a packed <a>Portable Web Document</a> via a Service Worker. (Picture is available directly <a href="figures/Workers-package.svg">SVG</a> or <a href="figures/Workers-package.png">PNG</a> formats.)</figcaption>
+          <figcaption>Accessing a <a>packed</a> <a>Portable Web Document</a> via a Service Worker. (Picture is available directly <a href="figures/Workers-package.svg">SVG</a> or <a href="figures/Workers-package.png">PNG</a> formats.)</figcaption>
         </figure>
 
         <section>
           <h4>General Archive formats for the portable/offline state</h4>
 
-          <p id="sworkers">Regardless of the details or the Portable Web Documents architecture, an archive format is necessary for the storage of a publication as one file (e.g., for distribution). A variety of formats for offline/archival storage of collections of digital resources exist today [[OCF]], [[ODF]], [[OOXML]], but none of them is universally recognized and supported across ecosystems. Depending on the general architecture, Portable Web Documents may use the current EPUB packaging format (based on [[OCF]])) or it may need to be based on the definition of an archive format that is generic and native to the Open Web Platform. </p>
+          <p id="sworkers">Regardless of the details or the <a>Portable Web Documents</a> architecture, an archive format is necessary for the storage of a publication as one file (e.g., for distribution). A variety of formats for offline/archival storage of collections of digital resources exist today [[OCF]], [[ODF]], [[OOXML]], but none of them is universally recognized and supported across ecosystems. Depending on the general architecture, Portable Web Documents may use the current EPUB packaging format (based on [[OCF]])) or it may need to be based on the definition of an archive format that is generic and native to the Open Web Platform. </p>
 
           <div class="note">
             <p>W3C’s <a href="http://www.w3.org/2008/webapps/">Web Application Working Group</a> has published a First Working Draft for a Streamable Package Format for the Web[[web-packaging]] to encompass the needs of various applications (like installing Web Applications or downloading data for local processing). It is may become advantageous for Portable Web Documents to adopt this format, thereby being compatible with what Web Browsers may implement anyway. While this general packaging format could hypothetically be compatible with the ZIP+XML manifest format used by EPUB (and also by the Open Document Format [[ODF]]) the broader requirements of installable applications and other types of content, and efficient incremental transmission over networks, may well imply a different and incompatible packaging format.
@@ -602,11 +595,11 @@
         <section>
           <h3>Capturing overall publication structure</h3>
 
-          <p>Portable document formats usually include information pertaining to the overall publication structure, such as the logical reading order(s) of the set of resources that comprise the publication (e.g. the “spine” and associated constructs in EPUB), as well as predictable user-facing meta-structures, such as one or several tables of contents or “guides”. (EPUB already incorporates definitions of how to express these data based on W3C Standards such as XML and HTML.) For the requirements of Portable Web Documents it may be imperative to optimize these data structures in a way that is native to the Open Web Platform and more easily supported in authoring tools, browsers, and Reading Systems. If the vision based on Service Workers, as <a href="#sworkers">outlined above</a>, becomes the approach chosen for the architecture Portable Web Document user agents, that overall structural information may be what a client would return on a request for an Portable Web Documents instance, as an abstraction for a collection of Web resources.</p>
+          <p>Portable document formats usually include information pertaining to the overall publication structure, such as the logical reading order(s) of the set of resources that comprise the publication (e.g. the “spine” and associated constructs in EPUB), as well as predictable user-facing meta-structures, such as one or several tables of contents or “guides”. (EPUB already incorporates definitions of how to express these data based on W3C Standards such as XML and HTML.) For the requirements of <a>Portable Web Documents</a> it may be imperative to optimize these data structures in a way that is native to the Open Web Platform and more easily supported in authoring tools, browsers, and Reading Systems. If the vision based on Service Workers, as <a href="#sworkers">outlined above</a>, becomes the approach chosen for the architecture Portable Web Document user agents, that overall structural information may be what a client would return on a request for an Portable Web Documents instance, as an abstraction for a collection of Web resources.</p>
 
           <p>The Manifest for web application format [[web-manifest]] is one example of a technology that could potentially be used to achieve this goal.</p>
 
-          <p class="note">Whilst these information objects are important for larger and/or more complex publications, it is unnecessary for a number of use cases for Portable Web Documents. A typical example is the archival of a document consisting of a single Web page. Portable Web Documents should therefore include the definition of a set of “defaults”, i.e., it should not require the presence of, say, a spine if the publication contains one single HTML file.</p>
+          <p class="note">Whilst these information objects are important for larger and/or more complex publications, it is unnecessary for a number of use cases for <a>Portable Web Documents</a>. A typical example is the archival of a document consisting of a single Web page. <a>Portable Web Documents</a> should therefore include the definition of a set of “defaults”, i.e., it should not require the presence of, say, a spine if the publication contains one single HTML file.</p>
         </section>
 
       </section>
@@ -615,10 +608,10 @@
         <h3 id="idf">Document and fragment identification</h3>
         <p>On the web, HTTP URIs serve as the fundamental method of identifying a resource, or a fragment thereof. Among the various portable document formats available today, there is no equivalent ubiquitous method for identifying a publication that by definition does not have an HTTP address. Within the scholarly publishing industry, for example, initiatives such as <a href="http://www.doi.org">DOI</a> and <a href="http://crossref.org">CROSSREF</a> have addressed this problem by providing explicit URN resolver services, but these services are not used by traditional “trade” publishing that rely more on ISBN related services. Also, for a universally applicable portable document format, unconditionally relying on distinct resolver services is suboptimal for a number of use cases, primarily as these may not be free of charge, and may require registration process that is not be applicable to the use case at hand. </p>
 
-        <p class="note">A typical, and extremely valuable use case is in academic and scholarly publishing. There are currently several methods for citing online works (disputed among style guides), but there is no standard method for citations to ebooks. Even if a reflowable ebook is by a scholar, she must refer to PDF, paper copy, or HTML version to cite it in her bibliography. Portable Web Documents should enable stable citations.</p>
+        <p class="note">A typical, and extremely valuable use case is in academic and scholarly publishing. There are currently several methods for citing online works (disputed among style guides), but there is no standard method for citations to ebooks. Even if a reflowable ebook is by a scholar, she must refer to PDF, paper copy, or HTML version to cite it in her bibliography. <a>Portable Web Documents</a> should enable stable citations.</p>
 
 
-        <p>Portable Web Documents needs to define a way to utilize URI schemes for identifying documents and/or fragments thereof such that the addressing scheme does not break, nor needs to be changed, when a document transits from online to offline/portable states, or vice versa.  A number of questions arise and need answers, e.g.:</p>
+        <p><a>Portable Web Documents</a> needs to define a way to utilize URI schemes for identifying documents and/or fragments thereof such that the addressing scheme does not break, nor needs to be changed, when a document transits from <a>online</a> to <a>offline</a>, and from <a>packed</a> to <a>unpacked</a> states, or vice versa.  A number of questions arise and need answers, e.g.:</p>
 
         <ul>        
           <li>What is the URI of the offline version of the document? How does that URI relate to the online identification of the content?</li>
@@ -628,7 +621,7 @@
           <li>Should there be one URI identifying the content itself, regardless of its format (e.g., whether it is online or offline)? This is akin to the issue of identifying, e.g., a book as a whole, as opposed to its delivery format (i.e., whether it is a printed or electronic).</li>
         </ul>
 
-        <p>Beyond the identification of the document as a whole, there is a further need for fragment identification, i.e., to identify “anchors” within the document. Portable Web Documents needs to include fragment identification schemes that are agnostic to the online/offline state, and that can address fragments of various kinds (e.g. resources within archives, elements with or without IDs, text ranges, time positions, etc.) and for various media types.</p>
+        <p>Beyond the identification of the document as a whole, there is a further need for fragment identification, i.e., to identify “anchors” within the document. <p>Portable Web Documents</p> needs to include fragment identification schemes that are agnostic to different states, and that can address fragments of various kinds (e.g. resources within archives, elements with or without IDs, text ranges, time positions, etc.) and for various media types.</p>
 
         <p class="note">Today’s EPUB supports a mechanism [[CFI]] for fine-grained references into a publication, but it is not defined in a manner that natively handles transitions between online and offline/portable states.</p>
 
