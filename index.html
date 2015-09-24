@@ -19,6 +19,41 @@
         text-align: justify;
         font-size: 105%;
       }
+
+      /* Table zebra style... */
+      table.zebra {
+        font-size:inherit;
+        font:100%;
+        margin:1em;
+      }
+
+      table.zebra td {  
+          padding-left: 0.3em;
+      }
+
+      table.zebra th {  
+        font-weight: bold;  
+        text-align: center;  
+        background-color: NavyBlue !important; 
+        font-size: 110%;
+        background: hsl(180, 30%, 50%); 
+        color: #fff;
+      }
+
+      table.zebra th a:link {
+        color: #fff;
+      }
+
+      table.zebra th a:visited {
+        color: #aaa;
+      }
+
+      table.zebra tr:nth-child(even) { 
+        background-color: hsl(180, 30%, 93%) 
+      }
+
+      table.zebra th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+      table.zebra td{border-bottom:1px solid #ddd;padding:.2em 1em;}
     </style>
 
     <!--
@@ -435,40 +470,90 @@
       </section> 
     </section>
 
-    <section id="pwd_definition">
-      <h2>Definition of Portable Web Documents</h2>
+    <section>
+      <h2>Terminology</h2>
 
-      <p>This document is based on the following defintions</p>
+      <section>
+        <h2 id="pwd_definition">Definitions of Portable Web Documents</h2>
 
-      <ul>
-        <li> A <dfn data-lt="Web Resource|Web Resources">Web Resource</dfn> is a digital resource that can be uniquely addressed by a Unified Resource Identifier (URI)&nbsp;[[URI]], and whose content can be accessed through standard protocols like HTTP, FTP, etc.
-          <ul>   
-            <li><dfn data-lt="Essential Content|essential content">Essential Content</dfn> of a <a>Web Resource</a>: if removed, would fundamentally change the information or <a>functionality</a> of the content.</li>
-            <li><dfn data-lt="Functionality|functionality">Functionality</dfn> related to a <a>Web Resource</a>: processes and outcomes achievable through user action.</li>
+        <p>This document is based on the following defintions</p>
+
+        <ul>
+          <li> A <dfn data-lt="Web Resource|Web Resources">Web Resource</dfn> is a digital resource that can be uniquely addressed by a Unified Resource Identifier (URI)&nbsp;[[URI]], and whose content can be accessed through standard protocols like HTTP, FTP, etc.
+            <ul>   
+              <li><dfn data-lt="Essential Content|essential content">Essential Content</dfn> of a <a>Web Resource</a>: if removed, would fundamentally change the information or <a>functionality</a> of the content.</li>
+              <li><dfn data-lt="Functionality|functionality">Functionality</dfn> related to a <a>Web Resource</a>: processes and outcomes achievable through user action.</li>
+            </ul>
+          </li> 
+          <li>A <dfn data-lt="Web Document|Web Documents">Web Document</dfn> is a <a>Web Resource</a> which itself is a collated set of interrelated <a>Web Resources</a> and which is intended to be seen as a single <a>Web Resource</a>.
+            <ul> 
+              <li>A <a>Web Document</a> should be constructed of resources whose formats enable (individually or in conjunction with other resources in the same <a>Web Document</a>) delivery of <a>essential content</a> and <a>functionality</a> when delivered via a variety of technologies or delivery platforms.</li>
+
+              <li>A <a>Web Document</a> should provide a gracefully degrading experience when delivered via a variety of technologies or delivery platforms.</li>
+
+              <li>A <a>Web Document</a> should provide accessible access to content.</li>
+
+              <li>A <a>Web Document</a> is not an object with a precise technical meaning, e.g., it is not necessarily equivalent to an HTML Document.</li>
+            </ul>
+          </li>
+          <li>A <dfn data-lt="Portable Web Resource|Portable Web Resources">Web Resource</dfn> in a <a>Web Document</a> is <dfn>Portable</dfn> if an OWP compliant user agent can render its <a>essential content</a> by relying essentially on the <a>Web Resources</a> within the same <a>Web Document</a></li>
+
+          <li>A <dfn data-lt="Portable Web Document|Portable Web Documents|PWD">Portable Web Document (PWD)</dfn> is a <a>Web Document</a> whose all constituent <a>Web Resources</a> are <a data-lt="Portable Web Resource">Portable</a>.</li>
+        </ul>
+
+        <p>The differences between the distinguishing characteristics of <a>Web Documents</a> and <a>Portable Web Documents</a> can be viewed as situational and gradual rather than as representative of bright-line distinctions. Just as most of the content features of Web pages and portable documents implemented via digital publications are held in common, portable documents and documents on the Web share a desire for occasional or on-demand use of their distinguishing characteristics. Authors of HTML Web pages using CSS for styling may want pagination features. Users of Web sites want the occasional ability to download a part of a Web site for offline use with links intact to both the saved offline content and remaining content that has not been downloaded. Reliable navigation of a Web site would increase usability and accessibility.
+        </p>
+
+        <p class="note">The concepts of <a>essential content</a> and <a>functionality</a> have been taken over from the Web Content Accessibility Guidelines&nbsp;[[WCAG20]]</p>
+
+       </section>
+       <section>
+          <h2 id="pwd_states">States of a Portable Web Documents</h2>
+          <p><a>Portable Web Documents</a> can be in different <em>states</em> depending on their organizations and access. There are two pairs of states as follows:</p>
+
+          <ul>
+            <li>With regard to resource organization, a <a>Portable Web Document</a> can be in a:
+              <ul>
+                <li><dfn data-lt="Packed State|packed state">Packed State</dfn>, when all constituents <a>Web Resources</a> are combined into one unit for, e.g., storage in a file system, network transfer, etc</li>
+                <li><dfn data-lt="Unpacked State|unpacked state">Unpacked State</dfn>, when all constituent <a>Web Resources</a> are directly accessible individually through standard network protocols like HTTP(S), FTP, etc., or through direct file system access.</li>
+              </ul>
+            </li>
+            <li>With regard to access, a <a>Portable Web Document</a> can be in a:
+              <ul>
+                <li><dfn data-lt="Online State|online state">Online State</dfn>, when the document can be accessed through standard network protocols, like HTTP(S) or FTP</li>
+                <li><dfn data-lt="Offline State|offline state">Offline State</dfn>, when the document can be accessed through the local file system access, as provided by the local operating system.</li>
+              </ul>
+            </li>
           </ul>
-        </li> 
-        <li>A <dfn data-lt="Web Document|Web Documents">Web Document</dfn> is a <a>Web Resource</a> which itself is a collated set of interrelated <a>Web Resources</a> and which is intended to be seen as a single <a>Web Resource</a>.
-          <ul> 
-            <li>A <a>Web Document</a> should be constructed of resources whose formats enable (individually or in conjunction with other resources in the same <a>Web Document</a>) delivery of <a>essential content</a> and <a>functionality</a> when delivered via a variety of technologies or delivery platforms.</li>
 
-            <li>A <a>Web Document</a> should provide a gracefully degrading experience when delivered via a variety of technologies or delivery platforms.</li>
+          <p class="note">These definitions mean that a Portable Web Document stored on a local disc, but accessed through HTTP running on a local machine (i.e., through an <code>http://localhost/…</code> URL) is considered to be “online”.</p>
 
-            <li>A <a>Web Document</a> should provide accessible access to content.</li>
+          <p>The following table gives some typical examples for various combination of states a <a>Portable Web Document</a> can be in:</p>
 
-            <li>A <a>Web Document</a> is not an object with a precise technical meaning, e.g., it is not necessarily equivalent to an HTML Document.</li>
-          </ul>
-        </li>
-        <li>A <dfn data-lt="Portable Web Resource|Portable Web Resources">Web Resource</dfn> in a <a>Web Document</a> is <dfn>Portable</dfn> if an OWP compliant user agent can render its <a>essential content</a> by relying essentially on the <a>Web Resources</a> within the same <a>Web Document</a></li>
+          <table class="zebra">
+            <tr>
+              <th style="width: 10%"></th>
+              <th style="width:40%">Offline</th>
+              <th>Online</th>
+            </tr>
+            <tr>
+              <th style="text-align:left">Packed</th>
+              <td>PWD as one file on local disc</td>
+              <td>PWD as one file on a server</td>
+            </tr>
+            <tr>
+              <th style="text-align:left">Unpacked</th>
+              <td>PWD as files in a folder on local disc</td>
+              <td>PWD as files in a folder on a server <br>(or on local disc accessed through local server)</td>
+            </tr>
+          </table>
 
-        <li>A <dfn data-lt="Portable Web Document|Portable Web Documents|PWD">Portable Web Document (PWD)</dfn> is a <a>Web Document</a> whose all constituent <a>Web Resources</a> are <a data-lt="Portable Web Resource">Portable</a>.</li>
-      </ul>
 
-      <p>The differences between the distinguishing characteristics of <a>Web Documents</a> and <a>Portable Web Documents</a> can be viewed as situational and gradual rather than as representative of bright-line distinctions. Just as most of the content features of Web pages and portable documents implemented via digital publications are held in common, portable documents and documents on the Web share a desire for occasional or on-demand use of their distinguishing characteristics. Authors of HTML Web pages using CSS for styling may want pagination features. Users of Web sites want the occasional ability to download a part of a Web site for offline use with links intact to both the saved offline content and remaining content that has not been downloaded. Reliable navigation of a Web site would increase usability and accessibility.
-      </p>
+       </section>
 
-      <p class="note">The concepts of <a>essential content</a> and <a>functionality</a> have been taken over from the Web Content Accessibility Guidelines&nbsp;[[WCAG20]]</p>
 
-     </section>
+
+    </section>
 
     <section>
       <h2>Achieving convergence: work areas</h2>
