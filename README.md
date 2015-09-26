@@ -1,6 +1,8 @@
 Advancing Portable Documents for the Open Web Platform: EPUB-WEB
 ===============================================================
 
+***This Repo should be considered as closed now. The work has been transferred to the [DPUB Interest Group](http://www.w3.org/dpub/IG/) and is now part of the deliverables of that group. See the [new repo](https://github.com/w3c/dpub-pwd) for the continuation work. (2015-09-26)***
+
 This is the repo for a White Paper on EPUB-WEB. 
 
 The latest “published” version of the White Paper is the[index.html](index.html) file; to view the document properly rendered in a browser, use the [”paged” version](http://w3c.github.io/epubweb/). The repository contains also copies of previous, “stable” versions. Finally, the current [development draft](draft/index.html) is also available for comments.
